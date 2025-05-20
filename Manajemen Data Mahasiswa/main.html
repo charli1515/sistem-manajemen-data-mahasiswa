@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Beranda - Sistem Manajemen Data Mahasiswa</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('kampus.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.85);
+  z-index: -1;
+}
+header {
+  background-color: #0a9396;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.copyright {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 14px;
+  color: #d4f1f4;
+  font-weight: bold;
+}
+nav {
+  background-color: #077072;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+.menu-toggle {
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  z-index: 10;
+}
+.dropdown a {
+  color: #003366;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+}
+.dropdown a:hover {
+  background-color: #f1f1f1;
+}
+.show {
+  display: block;
+}
+.container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+  text-align: center;
+}
+.search-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+.search-input-container {
+  position: relative;
+  display: inline-block;
+}
+.search-container input {
+  padding: 10px;
+  width: 60%;
+  border: 1px solid #0a9396;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.search-container button {
+  padding: 10px 15px;
+  background-color: #0a9396;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+.search-container button:hover {
+  background-color: #145c5d;
+}
+.search-results {
+  margin-top: 20px;
+  text-align: left;
+}
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+.search-results li {
+  padding: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.search-results li:hover {
+  background-color: #f1f1f1;
+}
+.not-found {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.popup-overlay {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+.popup-overlay.active {
+  display: flex;
+}
+.popup-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  min-width: 280px;
+  text-align: left;
+  position: relative;
+  animation: popupIn 0.2s;
+}
+.popup-content h3 {
+  margin-top: 0;
+  color: #0a9396;
+}
+.popup-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #0a9396;
+  cursor: pointer;
+}
+@keyframes popupIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="copyright">&copy; Kelompok_4 2025</div>
+  <h1>Sistem Manajemen Data Mahasiswa</h1>
+</header>
+<nav>
+  <button class="menu-toggle" onclick="toggleMenu()">☰ Beranda</button>
+  <div id="dropdownMenu" class="dropdown">
+    <a href="login.html">Login</a>
+    <a href="daftar.html">Daftar</a>
+  </div>
+</nav>
+<div class="container">
+  <h2>Selamat Datang di Sistem Manajemen Data Mahasiswa</h2>
+  <p>Dengan Website ini Anda dapat mengelola & menyimpan data mahasiswa dengan aman dan terpercaya.</p>
+  <p>Silakan login atau daftar untuk melanjutkan.</p>
+</div>
+<div class="search-container">
+  <h2>Cari Mahasiswa Terdaftar</h2>
+  <div class="search-input-container">
+    <input type="text" id="searchInput" placeholder="Masukkan nama mahasiswa" onkeyup="searchMahasiswa()" />
+  </div>
+  <button onclick="searchMahasiswa()">Cari</button>
+  <div class="search-results" id="searchResults"></div>
+  <div id="notFoundMessage" class="not-found" style="display: none">Tidak Tersedia</div>
+</div>
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-content" id="popupContent">
+    <button class="close-btn" onclick="closePopup()">&times;</button>
+    <h3>Detail Mahasiswa</h3>
+    <div id="popupDetail"></div>
+  </div>
+</div>
+<script>
+let mahasiswaList = [];
+function searchMahasiswa() {
+  const query = document.getElementById("searchInput").value;
+  const searchResults = document.getElementById("searchResults");
+  const notFoundMessage = document.getElementById("notFoundMessage");
+  if (query === "") {
+    searchResults.innerHTML = "";
+    notFoundMessage.style.display = "none";
+    return;
+  }
+  fetch(`search_mahasiswa.php?keyword=${encodeURIComponent(query)}`)
+    .then((response) => response.json())
+    .then((data) => {
+      mahasiswaList = data;
+      searchResults.innerHTML = "";
+      notFoundMessage.style.display = "none";
+      if (data.length > 0) {
+        const ul = document.createElement("ul");
+        data.forEach((mahasiswa, idx) => {
+          const li = document.createElement("li");
+          li.textContent = mahasiswa.nama;
+          li.style.cursor = "pointer";
+          li.onclick = () => showPopup(idx);
+          ul.appendChild(li);
+        });
+        searchResults.appendChild(ul);
+      } else {
+        notFoundMessage.style.display = "block";
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+}
+function showPopup(idx) {
+  const data = mahasiswaList[idx];
+  const popupOverlay = document.getElementById("popupOverlay");
+  const popupDetail = document.getElementById("popupDetail");
+  popupDetail.innerHTML = `<p><strong>Nama:</strong> ${data.nama}</p>`;
+  popupOverlay.classList.add("active");
+}
+function closePopup() {
+  document.getElementById("popupOverlay").classList.remove("active");
+}
+function toggleMenu() {
+  document.getElementById("dropdownMenu").classList.toggle("show");
+}
+window.onclick = function (e) {
+  if (!e.target.matches(".menu-toggle")) {
+    const dropdown = document.getElementById("dropdownMenu");
+    if (dropdown.classList.contains("show")) {
+      dropdown.classList.remove("show");
+    }
+  }
+  const popupOverlay = document.getElementById("popupOverlay");
+  const popupContent = document.getElementById("popupContent");
+  if (
+    popupOverlay.classList.contains("active") &&
+    !popupContent.contains(e.target) &&
+    e.target !== popupContent
+  ) {
+    closePopup();
+  }
+};
+</script>
+</body>
+</html>

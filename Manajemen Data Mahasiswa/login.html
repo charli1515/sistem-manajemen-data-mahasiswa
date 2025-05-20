@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form action="proses_login.php" method="POST">
+      <div class="input-group">
+        <input type="email" name="email" placeholder="Email" required />
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" placeholder="Password" required />
+      </div>
+
+      <div class="input-group">
+        <label for="role">Login sebagai:</label>
+        <select name="role" id="role" required>
+          <option value="mahasiswa" selected>Mahasiswa</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+    <div class="signup-link">
+      <p>Belum punya akun? <a href="daftar.html">Daftar</a></p>
+    </div>
+  </div>
+</body>
+</html>
